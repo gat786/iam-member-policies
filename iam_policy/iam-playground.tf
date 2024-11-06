@@ -50,3 +50,5 @@ resource "google_project_iam_policy" "policy_for_project" {
   project     = var.project
   policy_data = data.google_iam_policy.policy_for_project.policy_data
 }  
+
+
