@@ -65,13 +65,13 @@ resource "google_project_iam_member" "cloudsql_instanceuser2" {
 #     {
 #       "members": [
 #         "user:ganesht049@gmail.com"
+#         "user:me@gats.dev"
 #       ],
 #       "role": "roles/cloudsql.instanceUser"
 #     },
 #     {
 #       "members": [
 #         "user:ganesht049@gmail.com",
-#         "user:me@gats.dev"
 #       ],
 #       "role": "roles/owner"
 #     }
