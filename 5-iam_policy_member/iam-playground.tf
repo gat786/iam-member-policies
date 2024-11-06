@@ -37,13 +37,13 @@
 #   "version": 3
 # }
 resource "google_project_iam_member" "cloudsql_instanceuser" {
-  project = "curious-checking-stuff"
+  project = var.project
   role    = "roles/cloudsql.instanceUser"
   member  = "user:ganesh@gmail.com"
 }
 
 resource "google_project_iam_member" "cloudsql_instanceuser2" {
-  project = "curious-checking-stuff"
+  project = var.project
   role    = "roles/cloudsql.instanceUser"
   member  = "user:ganesht049@gmail.com"
 

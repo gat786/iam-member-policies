@@ -31,7 +31,7 @@
 # }
 
 resource "google_project_iam_binding" "cloudsql_admin_again" {
-  project = "curious-checking-stuff"
+  project = var.project
   role    = "roles/cloudsql.admin"
   members = [
     "user:me@gats.dev"

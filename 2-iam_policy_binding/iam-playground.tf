@@ -14,7 +14,7 @@
 # }
 
 resource "google_project_iam_binding" "cloudsql_admin" {
-  project = "curious-checking-stuff"
+  project = var.project
   role    = "roles/cloudsql.admin"
   members = [
     "user:ganesht049@gmail.com" 
@@ -22,7 +22,7 @@ resource "google_project_iam_binding" "cloudsql_admin" {
 }
 
 resource "google_project_iam_binding" "cloudsql_admin_cond" {
-  project = "curious-checking-stuff"
+  project = var.project
   role    = "roles/cloudsql.admin"
   members = [
     "user:ganesht049@gmail.com"
