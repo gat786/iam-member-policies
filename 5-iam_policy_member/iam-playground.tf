@@ -1,0 +1,106 @@
+# before applying the above terraform code.
+# > g projects get-iam-policy curious-checking-stuff --format json
+# {
+#   "bindings": [
+#     {
+#       "members": [
+#         "user:me@gats.dev"
+#       ],
+#       "role": "roles/cloudsql.admin"
+#     },
+#     {
+#       "condition": {
+#         "description": "Expiring at midnight of 2025-01-01",
+#         "expression": "request.time < timestamp('2025-01-01T00:00:00Z')",
+#         "title": "expires_after_2025_01_01"
+#       },
+#       "members": [
+#         "user:ganesht049@gmail.com"
+#       ],
+#       "role": "roles/cloudsql.admin"
+#     },
+#     {
+#       "members": [
+#         "user:ganesht049@gmail.com"
+#       ],
+#       "role": "roles/cloudsql.instanceUser"
+#     },
+#     {
+#       "members": [
+#         "user:ganesht049@gmail.com",
+#         "user:me@gats.dev"
+#       ],
+#       "role": "roles/owner"
+#     }
+#   ],
+#   "etag": "BwYmQk121oc=",
+#   "version": 3
+# }
+resource "google_project_iam_member" "cloudsql_instanceuser" {
+  project = "curious-checking-stuff"
+  role    = "roles/cloudsql.instanceUser"
+  member  = "user:ganesh@gmail.com"
+}
+
+resource "google_project_iam_member" "cloudsql_instanceuser2" {
+  project = "curious-checking-stuff"
+  role    = "roles/cloudsql.instanceUser"
+  member  = "user:ganesht049@gmail.com"
+
+  condition {
+    title       = "expires_after_2025_01_01"
+    description = "Expiring at midnight of 2025-01-01"
+    expression  = "request.time < timestamp('2025-01-01T00:00:00Z')"
+  }
+}
+
+# after applying the above terraform code.
+# > g projects get-iam-policy curious-checking-stuff --format json
+# {
+#   "bindings": [
+#     {
+#       "members": [
+#         "user:me@gats.dev"
+#       ],
+#       "role": "roles/cloudsql.admin"
+#     },
+#     {
+#       "condition": {
+#         "description": "Expiring at midnight of 2025-01-01",
+#         "expression": "request.time < timestamp('2025-01-01T00:00:00Z')",
+#         "title": "expires_after_2025_01_01"
+#       },
+#       "members": [
+#         "user:ganesht049@gmail.com"
+#       ],
+#       "role": "roles/cloudsql.admin"
+#     },
+#     {
+#       "members": [
+#         "user:ganesh@gmail.com",
+#         "user:ganesht049@gmail.com",
+#         "user:me@gats.dev"
+#       ],
+#       "role": "roles/cloudsql.instanceUser"
+#     },
+#     {
+#       "condition": {
+#         "description": "Expiring at midnight of 2025-01-01",
+#         "expression": "request.time < timestamp('2025-01-01T00:00:00Z')",
+#         "title": "expires_after_2025_01_01"
+#       },
+#       "members": [
+#         "user:ganesht049@gmail.com"
+#       ],
+#       "role": "roles/cloudsql.instanceUser"
+#     },
+#     {
+#       "members": [
+#         "user:ganesht049@gmail.com"
+#       ],
+#       "role": "roles/owner"
+#     }
+#   ],
+#   "etag": "BwYmQmYBRPo=",
+#   "version": 3
+# }
